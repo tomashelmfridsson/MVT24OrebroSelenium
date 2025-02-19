@@ -39,9 +39,19 @@ public class Tricentis {
     @Ignore("Testen är inaktiverad för tillfället")
     //@Test
     public void testTricentis() {
-        WebElement registerLink = driver.findElement(By.className("ico-register"));
-        WebElement booksLink = driver.findElement(By.xpath(
-                "/html/body/div[4]/div[1]/div[4]/div[1]/div[1]/div[2]/ul/li[1]/a"));
+        // WebElement registerLink = driver.findElement(By.className("ico-register"));
+        //WebElement registerLink = driver.findElement(By.cssSelector(".ico-register"));
+        //WebElement registerLink = driver.findElement(By.cssSelector("./*co-register"));
+        //WebElement registerLink = driver.findElement(By.cssSelector(".ico-regis/*"));
+        //WebElement registerLink = driver.findElement(By.cssSelector(".^ico-regis/*"));
+        WebElement registerLink = driver.findElement(By.cssSelector("./*co-register$"));
+
+
+        // WebElement booksLink = driver.findElement(By.xpath(
+        //        "/html/body/div[4]/div[1]/div[4]/div[1]/div[1]/div[2]/ul/li[1]/a"));
+        // WebElement booksLink = driver.findElement(By.cssSelector(".inactive:first-child()"));
+        WebElement booksLink = driver.findElement(By.cssSelector(".listbox .inactive:nth-of-type(1)"));
+
         WebElement welcomeText = driver.findElement(By.cssSelector(".topic-html-content-title"));
 
         assertEquals("Register", registerLink.getText());
@@ -53,24 +63,28 @@ public class Tricentis {
     // Navigera till sidan: https://demowebshop.tricentis.com/register
     // Fyll i registreringsformuläret
     // Kontrollera att du hamnar på en bekräftelsesida eller får ett meddelande som säger att kontot skapades.
-    @Ignore("Testen är inaktiverad för tillfället")
-    //@Test
+    //@Ignore("Testen är inaktiverad för tillfället")
+    @Test
     public void searchComputingAndInternet() {
-        WebElement searchField = driver.findElement(By.name("q"));
-        WebElement searchBoxButton = driver.findElement(By.className("search-box-button"));
+        //WebElement searchField = driver.findElement(By.name("q"));
+        WebElement searchField = driver.findElement(By.cssSelector("[name='q']"));
+
+        //WebElement searchBoxButton = driver.findElement(By.className("search-box-button"));
+        WebElement searchBoxButton = driver.findElement(By.cssSelector(".search-box-button"));
+
         searchField.sendKeys("Computing and Internet");
         searchBoxButton.click();
-        WebElement searchResult = driver.findElement(By.className("product-title"));
+        WebElement searchResult = driver.findElement(By.cssSelector(".product-title"));
         assertEquals("Computing and Internet", searchResult.getText());
     }
 
     // Navigera till sidan: https://demowebshop.tricentis.com/register
     // Fyll i registreringsformuläret
     // Kontrollera att du hamnar på en bekräftelsesida eller får ett meddelande som säger att kontot skapades.
-    //@Test
+    @Test
     public void register() {
-        driver.findElement(By.className("ico-register")).click();
-        driver.findElement(By.id("gender-male")).isSelected();
+        driver.findElement(By.cssSelector(".ico-register")).click();
+        driver.findElement(By.cssSelector("#gender-male")).isSelected();
         driver.findElement(By.id("FirstName")).sendKeys("Test");
         driver.findElement(By.id("LastName")).sendKeys("Testsson");
         driver.findElement(By.id("Email")).sendKeys("tomastestgubbe" + System.currentTimeMillis() + "@gmail.com");
