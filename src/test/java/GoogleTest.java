@@ -4,7 +4,7 @@ import org.openqa.selenium.chrome.*;
 
 // import org.junit.Test;   // Junit4
 import org.junit.jupiter.api.Test; //JUnit5
-public class Google {
+public class GoogleTest {
 
     @Test
 

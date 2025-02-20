@@ -1,5 +1,4 @@
 
-import org.junit.After;
 import org.junit.Ignore;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,17 +8,16 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 
 import org.junit.jupiter.api.Test; //JUnit5
+import org.openqa.selenium.json.JsonOutput;
 
-import javax.swing.*;
-import java.util.Arrays;
 import java.util.List;
-import java.util.jar.JarOutputStream;
 
 import static java.lang.Double.parseDouble;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Tricentis {
+public class TricentisTest {
     private static WebDriver driver;
+
 
     @BeforeAll
     public static void setup() {
@@ -64,7 +62,7 @@ public class Tricentis {
     // Fyll i registreringsformuläret
     // Kontrollera att du hamnar på en bekräftelsesida eller får ett meddelande som säger att kontot skapades.
     //@Ignore("Testen är inaktiverad för tillfället")
-    @Test
+    //@Test
     public void searchComputingAndInternet() {
         //WebElement searchField = driver.findElement(By.name("q"));
         WebElement searchField = driver.findElement(By.cssSelector("[name='q']"));
@@ -81,7 +79,7 @@ public class Tricentis {
     // Navigera till sidan: https://demowebshop.tricentis.com/register
     // Fyll i registreringsformuläret
     // Kontrollera att du hamnar på en bekräftelsesida eller får ett meddelande som säger att kontot skapades.
-    @Test
+    //@Test
     public void register() {
         driver.findElement(By.cssSelector(".ico-register")).click();
         driver.findElement(By.cssSelector("#gender-male")).isSelected();
@@ -116,7 +114,7 @@ public class Tricentis {
     // Logga in med ett testkonto. tomastestgubbe@gmail.com
     // Verifiera att du är inloggad
     // Logga ut och verifiera att du är utloggad
-    @Test
+    //@Test
     public void loginTest() {
         driver.findElement(By.linkText("Log in")).click();
         driver.findElement(By.id("Email")).sendKeys("tomastestgubbe@gmail.com");
@@ -128,4 +126,19 @@ public class Tricentis {
         assertTrue(driver.findElement(By.linkText("Log in")).isDisplayed());
     }
 
+    @Test
+    public void catagories() throws InterruptedException {
+        List<WebElement> catagoriesElements = driver.findElements(By.cssSelector("[class*='category'] a"));
+        System.out.println(catagoriesElements.size());
+        for (WebElement element : catagoriesElements) {
+            System.out.print(element.getText());
+            System.out.println(element.getDomAttribute("href"));
+            if (element.getText().equals("Jewelry")) {
+                element.click();
+                break;
+            }
+        }
+        Thread.sleep(5000);
+    }
 }
+
